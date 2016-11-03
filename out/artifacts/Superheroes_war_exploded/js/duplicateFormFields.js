@@ -1,5 +1,4 @@
 $(function() {
-
     $("#addAlly").on("click", function () {
         $("#allies").last().clone(true, true).find("input:text").val("").end().insertAfter("#allies");
         return false;

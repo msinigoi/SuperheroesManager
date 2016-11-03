@@ -1,11 +1,10 @@
 $(function() {
-
     $("#addAlly").on("click", function () {
         $("#allies").last().clone(true, true).find("input:text").val("").end().insertAfter("#allies");
         return false;
     });
     $("#addPower").on("click", function () {
-        $("#powers").last().clone(true, true).insertAfter("#powers");
+        $("#powers").last().clone(true, true).find("input:text").val("").end().insertAfter("#powers");
         return false;
     });
 

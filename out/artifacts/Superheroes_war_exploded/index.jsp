@@ -10,7 +10,8 @@
       <title>Superheroes Database Manager</title>
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <script src="js/jquery-3.1.1.min.js"></script>
-      <script src="js/duplicate.js"></script>
+      <script src="js/duplicateFormFields.js"></script>
+      <script src="js/superheroSave.js"></script>
       <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -144,22 +145,15 @@
               </div>
         </div>
       </div>
-
-  <script>
-      $('#saveSuperhero').submit(function() {
-          $.ajax({
-              url: $('#saveSuperhero').attr('action'),
-              type: "POST",
-              data : $('#saveSuperhero').serialize(),
-              success: function() {
-                  alert("Superhero correctly saved");
-              },
-              error: function() {
-                  alert("Error saving the superhero");
-              }
-          });
-          return false;
-      });
-  </script>
+      <div class="alert alert-success" id="addSuperheroSuccess" style="display: none;">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>Success! </strong>
+          Superhero correctly saved.
+      </div>
+        <div class="alert alert-danger" id="addSuperheroError" style="display: none;">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>Error! </strong>
+          Something went wrong.
+      </div>
   </body>
 </html>
