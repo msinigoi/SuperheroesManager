@@ -11,7 +11,8 @@
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <script src="js/jquery-3.1.1.min.js"></script>
       <script src="js/duplicateFormFields.js"></script>
-      <script src="js/superheroSave.js"></script>
+      <script src="js/postSuperhero.js"></script>
+      <script src="js/getSuperheroFromName.js"></script>
       <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -42,7 +43,7 @@
 
                           <!-- Modal Body -->
                           <div class="modal-body">
-                              <form class="form-horizontal" role="form" id="saveSuperhero" action="/rest/resources/save" method="post">
+                              <form class="form-horizontal" role="form" id="saveSuperhero" action="/rest/resources/superheroes" method="post">
                                   <div class="form-group">
                                       <label  class="col-sm-4 control-label" for="addSuperheroName">Name:</label>
                                       <div class="col-sm-8">
@@ -128,17 +129,21 @@
 
                           <!-- Modal Body -->
                           <div class="modal-body">
-                              <form class="form-inline" role="form" id ="getSuperhero" action="/rest/resources/superhero" method="get">
+                              <form class="form-inline" role="form" id ="getSuperhero" action="/rest/resources/superheroes/" method="get">
                                   <div class="form-group">
                                       <label  class="col-sm-2 control-label" for="superheroName">Name:</label>
                                   </div>
                                   <div class="form-group">
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="superheroName" placeholder="Type superhero's name" name="superheroName"/>
+                                          <input type="text" class="form-control required" id="superheroName" placeholder="Type superhero's name" name="superheroName"/>
                                       </div>
                                   </div>
-                                  <input type="submit" class="btn btn-primary" value="Find Superhero">
                               </form>
+                          </div>
+
+                          <!-- Modal Body -->
+                          <div class="modal-footer">
+                              <button class="btn btn-primary" id="getSuperheroButton" onclick="getSuperheroFromName()">Find Superhero</button>
                           </div>
                       </div>
                   </div>

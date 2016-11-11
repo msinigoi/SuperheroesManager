@@ -40,10 +40,10 @@ public class SuperheroResourceImpl implements SuperheroResource {
     }
 
     @GET
-    @Path("/superhero")
+    @Path("superheroes/{superheroName}")
     @Produces(MediaType.APPLICATION_JSON)
     @Override
-    public String getSuperhero(@QueryParam("superheroName") String superheroName) {
+    public String getSuperhero(@PathParam("superheroName") String superheroName) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Superhero superheroToReturn = mapper.readValue(new File(superheroName + SuperheroResourceImpl.FILE_EXTENSION_JSON), Superhero.class);
@@ -56,7 +56,7 @@ public class SuperheroResourceImpl implements SuperheroResource {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes("application/x-www-form-urlencoded")
-    @Path("save")
+    @Path("superheroes")
     @Override
     public void saveSuperhero(@FormParam("superheroName") String superheroName,
                               @FormParam("superheroPseudonym") String superheroPseudonym,
