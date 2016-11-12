@@ -17,32 +17,19 @@ import java.util.List;
 @Path("resources")
 public class SuperheroResource {
 
-    private static final String FILE_EXTENSION_JSON = ".json";
-    private static final String STRING_MESSAGE_NO_SUPERHEROES_FOUND = "{\"message\":\"No Superheroes found.\"}";
     private static final String STRING_MESSAGE = "{\"message\":\" ";
     private static final String STRING_NOT_FOUND = " not found.\"}";
-    private final ObjectMapper mapper;
+    private final SuperheroResourceManager resourceManager;
 
     public SuperheroResource() {
-        mapper = new ObjectMapper();
+        resourceManager = new SuperheroResourceManager();
     }
 
     @GET
     @Path("superheroes")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllSuperheroes() throws IOException {
-        File dir = new File(".");
-        File[] files = dir.listFiles((dir1, name) -> name.endsWith(SuperheroResource.FILE_EXTENSION_JSON));
-
-        List<Superhero> superheroesList = new ArrayList<>();
-        if (files != null) {
-            for (File superheroesFile : files) {
-                superheroesList.add(mapper.readValue(superheroesFile, Superhero.class));
-            }
-        } else {
-            return STRING_MESSAGE_NO_SUPERHEROES_FOUND;
-        }
-        return mapper.writeValueAsString(superheroesList);
+        return resourceManager.getAllSuperheroes();
     }
 
     @GET
@@ -50,8 +37,7 @@ public class SuperheroResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getSuperhero(@PathParam("superheroName") String superheroName) {
         try {
-            Superhero superheroToReturn = mapper.readValue(new File(superheroName + SuperheroResource.FILE_EXTENSION_JSON), Superhero.class);
-            return superheroToReturn.toJson();
+            return resourceManager.getSuperhero(superheroName);
         } catch (Exception e) {
             return STRING_MESSAGE + superheroName + STRING_NOT_FOUND;
         }
@@ -66,7 +52,7 @@ public class SuperheroResource {
                               @FormParam("superheroPublisher") String superheroPublisher,
                               @FormParam("superheroDateOfFirstAppearance") String superheroDateOfFirstAppearance,
                               @FormParam("superheroAllies") List<String> superheroAllies,
-                              @FormParam("superheroPowers") List<String> superheroPowers) throws IOException, ParseException {
+                              @FormParam("superheroPowers") List<String> superheroPowers) throws IOException {
 
         Superhero superhero = new Superhero();
         superhero.setName(superheroName);
@@ -75,7 +61,7 @@ public class SuperheroResource {
         superhero.setDateOfFirstAppearance(superheroDateOfFirstAppearance);
         superhero.setAllies(superheroAllies);
         superhero.setPowers(superheroPowers);
-        mapper.writeValue(new File(superheroName + ".json"), superhero);
+        resourceManager.postSuperhero(superhero);
     }
 
 }
