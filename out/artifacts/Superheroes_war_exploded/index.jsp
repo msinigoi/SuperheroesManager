@@ -13,6 +13,7 @@
       <script src="js/duplicateFormFields.js"></script>
       <script src="js/postSuperhero.js"></script>
       <script src="js/getSuperheroFromName.js"></script>
+      <script src="js/enterPressedGetSuperheroFromName.js"></script>
       <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
